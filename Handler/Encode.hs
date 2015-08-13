@@ -48,7 +48,7 @@ isValidUrl url =
 
 
 word :: Parser Text
-word = fmap pack $ many1 $ satisfy ((\a b c -> a || b || c) <$> isAlpha <*> isDigit <*> (=='-'))
+word = fmap pack $ many1 $ satisfy (or <$> sequence [isAlpha, isDigit, (=='-')])
 
 parser :: Parser ()
 parser = do
